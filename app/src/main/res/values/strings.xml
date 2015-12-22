@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Embedded Editor Example</string>
+    <string name="launch_in_external_browser">Launch in external browser</string>
+    <string name="launch_as_new_activity">Launch as new activity</string>
+</resources>
