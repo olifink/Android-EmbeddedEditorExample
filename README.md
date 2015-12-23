@@ -33,11 +33,11 @@ startActivity(browserIntent);
 There are good reasons for not opening up a new browser for the user but to keep feedback
 functionality in the application itself. This can be done using a `WebView` control inside your
 activity. This is slightly more work than just opening up the browser, but it allows much
-more control over the experience. This is particularly important for back-navation handling, so
+more control over the experience. This is particularly important for back-navigation handling, so
 that pressing the back button while in the feedback flow allows the user to return to the
 previous page, and not - as would be the default - abandon the feedback submission completely.
 
-We have provided a suggested way to do this on Android with the [FeedbackActivity](../master/app/src/main/java/com/here/mapfeedback/examples/embeddededitorexample/FeedbacActivity.java)
+We have provided a suggested way to do this on Android with the [FeedbackActivity](../master/app/src/main/java/com/here/mapfeedback/examples/embeddededitorexample/FeedbackActivity.java)
 class. You should just be able to take this file and drop it into your own project. Keep in mind,
 however, to enable the right permissions for your project. You need the following entries
 in your [AndroidManifest.xml](../master/app/src/main/AndroidManifest.xml) file:
