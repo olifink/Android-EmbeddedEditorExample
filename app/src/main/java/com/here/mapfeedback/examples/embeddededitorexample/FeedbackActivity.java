@@ -43,6 +43,7 @@ public class FeedbackActivity extends Activity {
         });
 
         // and now load the the Embedded Editor Feedback widget
+        // Note: you should always include your real AppId, otherwise your feedback will be ignored
         myWebView.loadUrl("https://mapfeedback.here.com/");
     }
 

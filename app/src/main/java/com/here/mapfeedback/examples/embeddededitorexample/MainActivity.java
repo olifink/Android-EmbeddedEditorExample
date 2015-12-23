@@ -18,12 +18,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startBrowser(View view) {
+        // Note: you should always include your real AppId, otherwise your feedback will be ignored
         String feedbackUrl = "https://mapfeedback.here.com/";
+
+        // use a view intent on the URL to open the default browser
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(feedbackUrl));
         startActivity(browserIntent);
     }
 
     public void startActivity(View view) {
+        // show the FeedbackActivity to provide in-app feedback functionality
         Intent feedback = new Intent(this, FeedbackActivity.class);
         startActivity(feedback);
     }
