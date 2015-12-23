@@ -6,7 +6,7 @@ It shows two options how you can include the component in your own applications:
 - open up an external browser to load the reporting page
 - starting a new activity with a WebView embedded
 
-> Always make sure include your correct AppId as part of the URL parametersm otherwise
+> Always make sure include your correct AppId as part of the URL parameters, otherwise
 > we might feel free to ignore your feedback. To obtain the credentials for an application,
 > please visit http://developer.here.com/plans to register with HERE.
 
