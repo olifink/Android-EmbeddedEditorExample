@@ -19,8 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".FeedbackActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".FeedbackActivity">
-
         </activity>
 
     </application>
