@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.GeolocationPermissions;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -42,10 +43,20 @@ public class FeedbackActivity extends Activity {
             }
         });
 
+        // add handler to close FeedbackActivity via message send from Javascript:
+        //     window.MapFeedbackHandler.jsFnCall("FeedbackWidgetClose");
+        myWebView.addJavascriptInterface(this, "MapFeedbackHandler");
+
         // and now load the the Embedded Editor Feedback widget
         // Note: you should always include your real AppId, otherwise your feedback will be ignored
-        myWebView.loadUrl("https://mapfeedback.here.com/");
+        myWebView.loadUrl("https://mapfeedback.here.com/?webView=Android&hideLogo&showClose");
     }
+
+    @JavascriptInterface
+	public void jsFnCall(String jsString) {
+		if (jsString.equals("FeedbackWidgetClose"))
+			this.finish();
+	}
 
     // we want the back button to work properly inside the widget
     @Override
