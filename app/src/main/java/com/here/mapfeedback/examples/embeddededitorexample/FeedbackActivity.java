@@ -44,7 +44,6 @@ public class FeedbackActivity extends Activity {
         });
 
         // add handler to close FeedbackActivity via message send from Javascript:
-        //     window.MapFeedbackHandler.jsFnCall("FeedbackWidgetClose");
         myWebView.addJavascriptInterface(this, "MapFeedbackHandler");
 
         // and now load the the Embedded Editor Feedback widget
