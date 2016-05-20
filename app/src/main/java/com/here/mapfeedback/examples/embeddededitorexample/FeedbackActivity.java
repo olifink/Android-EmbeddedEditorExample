@@ -1,6 +1,7 @@
 package com.here.mapfeedback.examples.embeddededitorexample;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -13,11 +14,14 @@ import android.webkit.WebViewClient;
 
 public class FeedbackActivity extends Activity {
 
-    private WebView myWebView;
+    private WebView                 myWebView;
+    private ChromeClientExtensions  chromeExtensions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // WebView.setWebContentsDebuggingEnabled(true);  // enable remote debugging with Chrome DevTools
 
         // no layout.xml needed, just add a WebView
         myWebView = new WebView(this);
@@ -36,12 +40,7 @@ public class FeedbackActivity extends Activity {
            }
        });
 
-        // make sure we're allowed to use the location, and no need to persist it at the moment
-        myWebView.setWebChromeClient(new WebChromeClient() {
-            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
-                callback.invoke(origin, true, false);
-            }
-        });
+        myWebView.setWebChromeClient(chromeExtensions = new ChromeClientExtensions(this));
 
         // add handler to close FeedbackActivity via message send from Javascript:
         myWebView.addJavascriptInterface(this, "MapFeedbackHandler");
@@ -69,6 +68,11 @@ public class FeedbackActivity extends Activity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        chromeExtensions.handleActivityResult (requestCode, resultCode, intent);
     }
 
 }
