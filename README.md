@@ -113,5 +113,40 @@ To make it really feel naturally, this logic is not applied if the user just sub
 successfully. This this point in the flow, ie. when the URL contains `"#/submit"`, the back button
 should actually close the complete Activity and not go back through the browse history.
 
+## Close button integration
+
+For deeper integration on Android we also offer a way to show a form close button and
+have it call back from our web page into your Android code for handling. To set this up,
+the example code first registers a JavaScript handler interface on the web view with the
+current object under the `MapFeedbackHandler` name.
+
+````java
+// add handler to close FeedbackActivity via message send from Javascript:
+myWebView.addJavascriptInterface(this, "MapFeedbackHandler");
+````
+
+Our webView JavaScript uses this handler to call back into the native Java code for
+handling of the close event. In this case, the following function will receive the callback
+under the name `FeedbackWidgetClose`:
+
+````javav
+@JavascriptInterface
+public void jsFnCall(String jsString) {
+    if (jsString.equals("FeedbackWidgetClose"))
+        this.finish();
+}
+````
+
+Finally, you need to  pass the URL parameter `webView=Android` which makes sure to hook up
+the platform specific mechanics for this callback to work. As the close button is normally not
+shown on the web, you also want to add the `showClose` parameter. Additionally, depending on the
+devices you target, you might need more horizontal space for the close button. You can achieve
+this by hiding the logo with `hideLogo`.
+
+So your final call to set the URL for the webView would be
+
+    myWebView.loadUrl("https://mapfeedback.here.com/?webView=Android&hideLogo&showClose");
+
+
 And that's it really. We will be wrapping up that functionality in custom library, but until then,
 just feel free to take the code and include it in your own application.
